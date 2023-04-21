@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove Background</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="file"] {
+            margin-top: 1em;
+        }
+        input[type="submit"] {
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+        .result {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 2em;
+            text-align: center;
+        }
+        .result img {
+            max-width: 100%;
+        }
+        .download {
+            margin-top: 1em;
+            text-align: center;
+        }
+        .download a {
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Remove Background</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="image" />
+        <input type="submit" value="Remove Background" />
+    </form>
+    <div class="result" style="display: none;">
+        {% if result %}
+            <img src="http://127.0.0.1:5000/download" />
+            <div class="download">
+                <a href="/download">Download</a>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        var resultDiv = document.querySelector('.result');
+        var resultImg = resultDiv.querySelector('img');
+        
+        if (resultImg) {
+            // If the result image has loaded, show the result div
+            resultDiv.style.display = 'block';
+        } else {
+            // If the result image has not loaded, hide the result div
+            resultDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
